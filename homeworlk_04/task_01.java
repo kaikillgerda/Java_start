@@ -25,7 +25,7 @@ public class task_01 {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         ArrayList<String> textArr = new ArrayList<>();
-        ItemArray itemArr = new task1hw().new ItemArray();
+        ItemArray itemArr = new task_01().new ItemArray();
         do {
             itemArr = parseString(scan.nextLine(), "`");
             if (itemArr.index != -1) {
@@ -42,5 +42,33 @@ public class task_01 {
             }
         } while (!itemArr.text.equals("exit"));
         scan.close();
+    }
+
+    public class ItemArray {
+        String text;
+        int index;
+    }
+
+    public static ItemArray parseString(String str, String sep) {
+        String[] arr = str.split(sep);
+        ItemArray item = new task_01().new ItemArray();
+        try {
+            item.index = Integer.parseInt(arr[1]);
+        } catch (Exception e) {
+            item.index = -1;
+        }
+        if (item.index < 0)
+            item.index = -1;
+        item.text = arr[0];
+        return item;
+    }
+
+    public static void appendArrLst(ArrayList<String> arr, ItemArray item) {
+        if (item.index >= arr.size()) {
+            for (int i = arr.size(); i <= item.index; i++) {
+                arr.add("");
+            }
+        }
+        arr.set(item.index, item.text);
     }
 }
